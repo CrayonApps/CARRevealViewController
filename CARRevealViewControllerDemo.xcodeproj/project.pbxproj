@@ -19,6 +19,9 @@
 		2C5BA7ED18F05C57002F2455 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BA7CF18F05C56002F2455 /* UIKit.framework */; };
 		2C5BA7F518F05C57002F2455 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA7F318F05C57002F2455 /* InfoPlist.strings */; };
 		2C5BA7F718F05C57002F2455 /* CARRevealViewControllerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA7F618F05C57002F2455 /* CARRevealViewControllerDemoTests.m */; };
+		2C5BA80418F05D05002F2455 /* CARRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA80318F05D05002F2455 /* CARRevealViewController.m */; };
+		2C5BA80718F0757D002F2455 /* CARChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA80618F0757D002F2455 /* CARChildViewController.m */; };
+		2C5BA80918F076F9002F2455 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BA80818F076F9002F2455 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,11 @@
 		2C5BA7F218F05C57002F2455 /* CARRevealViewControllerDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CARRevealViewControllerDemoTests-Info.plist"; sourceTree = "<group>"; };
 		2C5BA7F418F05C57002F2455 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C5BA7F618F05C57002F2455 /* CARRevealViewControllerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARRevealViewControllerDemoTests.m; sourceTree = "<group>"; };
+		2C5BA80218F05D05002F2455 /* CARRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARRevealViewController.h; sourceTree = "<group>"; };
+		2C5BA80318F05D05002F2455 /* CARRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARRevealViewController.m; sourceTree = "<group>"; };
+		2C5BA80518F0757D002F2455 /* CARChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARChildViewController.h; sourceTree = "<group>"; };
+		2C5BA80618F0757D002F2455 /* CARChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARChildViewController.m; sourceTree = "<group>"; };
+		2C5BA80818F076F9002F2455 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5BA80918F076F9002F2455 /* QuartzCore.framework in Frameworks */,
 				2C5BA7CE18F05C56002F2455 /* CoreGraphics.framework in Frameworks */,
 				2C5BA7D018F05C56002F2455 /* UIKit.framework in Frameworks */,
 				2C5BA7CC18F05C56002F2455 /* Foundation.framework in Frameworks */,
@@ -96,6 +105,7 @@
 		2C5BA7CA18F05C56002F2455 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C5BA80818F076F9002F2455 /* QuartzCore.framework */,
 				2C5BA7CB18F05C56002F2455 /* Foundation.framework */,
 				2C5BA7CD18F05C56002F2455 /* CoreGraphics.framework */,
 				2C5BA7CF18F05C56002F2455 /* UIKit.framework */,
@@ -109,6 +119,9 @@
 			children = (
 				2C5BA7DA18F05C56002F2455 /* CARAppDelegate.h */,
 				2C5BA7DB18F05C56002F2455 /* CARAppDelegate.m */,
+				2C5BA80518F0757D002F2455 /* CARChildViewController.h */,
+				2C5BA80618F0757D002F2455 /* CARChildViewController.m */,
+				2C5BA80118F05CFC002F2455 /* CARRevealViewController */,
 				2C5BA7E318F05C56002F2455 /* Images.xcassets */,
 				2C5BA7D218F05C56002F2455 /* Supporting Files */,
 			);
@@ -143,6 +156,15 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		2C5BA80118F05CFC002F2455 /* CARRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C5BA80218F05D05002F2455 /* CARRevealViewController.h */,
+				2C5BA80318F05D05002F2455 /* CARRevealViewController.m */,
+			);
+			path = CARRevealViewController;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -241,7 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5BA80718F0757D002F2455 /* CARChildViewController.m in Sources */,
 				2C5BA7D818F05C56002F2455 /* main.m in Sources */,
+				2C5BA80418F05D05002F2455 /* CARRevealViewController.m in Sources */,
 				2C5BA7DC18F05C56002F2455 /* CARAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +386,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CARRevealViewControllerDemo/CARRevealViewControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "CARRevealViewControllerDemo/CARRevealViewControllerDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -375,6 +400,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CARRevealViewControllerDemo/CARRevealViewControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "CARRevealViewControllerDemo/CARRevealViewControllerDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
