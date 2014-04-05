@@ -13,8 +13,6 @@
 		2C5BA7D618F05C56002F2455 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA7D418F05C56002F2455 /* InfoPlist.strings */; };
 		2C5BA7D818F05C56002F2455 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA7D718F05C56002F2455 /* main.m */; };
 		2C5BA7DC18F05C56002F2455 /* CARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA7DB18F05C56002F2455 /* CARAppDelegate.m */; };
-		2C5BA7DF18F05C56002F2455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA7DD18F05C56002F2455 /* Main.storyboard */; };
-		2C5BA7E218F05C56002F2455 /* CARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA7E118F05C56002F2455 /* CARViewController.m */; };
 		2C5BA7E418F05C56002F2455 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BA7E318F05C56002F2455 /* Images.xcassets */; };
 		2C5BA7EB18F05C57002F2455 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BA7EA18F05C57002F2455 /* XCTest.framework */; };
 		2C5BA7EC18F05C57002F2455 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BA7CB18F05C56002F2455 /* Foundation.framework */; };
@@ -44,9 +42,6 @@
 		2C5BA7D918F05C56002F2455 /* CARRevealViewControllerDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CARRevealViewControllerDemo-Prefix.pch"; sourceTree = "<group>"; };
 		2C5BA7DA18F05C56002F2455 /* CARAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CARAppDelegate.h; sourceTree = "<group>"; };
 		2C5BA7DB18F05C56002F2455 /* CARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARAppDelegate.m; sourceTree = "<group>"; };
-		2C5BA7DE18F05C56002F2455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2C5BA7E018F05C56002F2455 /* CARViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CARViewController.h; sourceTree = "<group>"; };
-		2C5BA7E118F05C56002F2455 /* CARViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CARViewController.m; sourceTree = "<group>"; };
 		2C5BA7E318F05C56002F2455 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C5BA7E918F05C57002F2455 /* CARRevealViewControllerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CARRevealViewControllerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5BA7EA18F05C57002F2455 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -114,9 +109,6 @@
 			children = (
 				2C5BA7DA18F05C56002F2455 /* CARAppDelegate.h */,
 				2C5BA7DB18F05C56002F2455 /* CARAppDelegate.m */,
-				2C5BA7DD18F05C56002F2455 /* Main.storyboard */,
-				2C5BA7E018F05C56002F2455 /* CARViewController.h */,
-				2C5BA7E118F05C56002F2455 /* CARViewController.m */,
 				2C5BA7E318F05C56002F2455 /* Images.xcassets */,
 				2C5BA7D218F05C56002F2455 /* Supporting Files */,
 			);
@@ -231,7 +223,6 @@
 			files = (
 				2C5BA7E418F05C56002F2455 /* Images.xcassets in Resources */,
 				2C5BA7D618F05C56002F2455 /* InfoPlist.strings in Resources */,
-				2C5BA7DF18F05C56002F2455 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +241,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C5BA7E218F05C56002F2455 /* CARViewController.m in Sources */,
 				2C5BA7D818F05C56002F2455 /* main.m in Sources */,
 				2C5BA7DC18F05C56002F2455 /* CARAppDelegate.m in Sources */,
 			);
@@ -281,14 +271,6 @@
 				2C5BA7D518F05C56002F2455 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2C5BA7DD18F05C56002F2455 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C5BA7DE18F05C56002F2455 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		2C5BA7F318F05C57002F2455 /* InfoPlist.strings */ = {
