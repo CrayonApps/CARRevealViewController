@@ -95,6 +95,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Rotation
+- (BOOL)shouldAutorotate {
+	return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+	return 0;
+}
+
 #pragma mark - Subview Initialization
 - (void)createMaskView {
 	
