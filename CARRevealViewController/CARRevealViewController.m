@@ -31,8 +31,9 @@
 
 - (void)revealSideView:(UIView *)view toFrame:(CGRect)frame animated:(BOOL)animated toState:(CARRevealViewState)toState completion:(void(^)(void))complation;
 
-- (void)removeChildViewController:(UIViewController *)childViewController;
-- (void)addNewChildViewController:(UIViewController *)childViewController viewFrame:(CGRect)frame;
+- (void)addRevealChildView:(UIView *)view toView:(UIView *)superView;
+- (void)removeRevealChildViewController:(UIViewController *)childViewController;
+- (void)addRevealChildViewController:(UIViewController *)childViewController;
 
 @end
 
@@ -69,6 +70,8 @@
 		
 		_state = CARRevealViewStateDefault;
 		self.animationDuration = 0.3;
+		
+		[self createGestureRecognizers];
 	}
 	return self;
 }
@@ -81,11 +84,8 @@
 	[self createMaskView];
 	[self createLeftView];
 	[self createRightView];
-	[self createGestureRecognizers];
-
-	self.rootViewController.view.frame = self.rootView.bounds;
-	self.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	[self.rootView addSubview:self.rootViewController.view];
+	
+	[self addRevealChildView:self.rootViewController.view toView:self.rootView];
 	[self.rootView bringSubviewToFront:self.maskView];
 }
 
@@ -100,30 +100,38 @@
 	
 	NSAssert(self.maskView == nil, @"Are you sure about this?");
 	NSAssert(self.rootView, @"Cannot be nil");
+	NSAssert(self.interactiveHideGestureRecognizer, @"Cannot be nil");
 	
 	self.maskView = [[UIView alloc] initWithFrame:self.view.bounds];
 	self.maskView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.maskView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.7f];
 	self.maskView.alpha = 0.0f;
 	self.maskView.hidden = YES;
+	
 	[self.rootView addSubview:self.maskView];
+	[self.maskView addGestureRecognizer:self.interactiveHideGestureRecognizer];
 }
 
 - (void)createRootView {
 	
 	NSAssert(self.rootView == nil, @"Are you sure about this?");
+	NSAssert(self.interactiveRevealLeftGestureRecognizer, @"Cannot be nil");
+	NSAssert(self.interactiveRevealRightGestureRecognizer, @"Cannot be nil");
 
 	self.rootView = [[UIView alloc] initWithFrame:self.view.bounds];
 	self.rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.rootView.backgroundColor = [UIColor clearColor];
 	
 	[self.view addSubview:self.rootView];
+	[self.rootView addGestureRecognizer:self.interactiveRevealLeftGestureRecognizer];
+	[self.rootView addGestureRecognizer:self.interactiveRevealRightGestureRecognizer];
 }
 
 - (void)createLeftView {
 	
 	NSAssert(self.leftView == nil, @"Are you sure about this?");
-	
+	NSAssert(self.interactiveHideLeftGestureRecognizer, @"Cannot be nil");
+
 	self.leftView = [[UIView alloc] initWithFrame:self.leftViewFrame];
 	self.leftView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.leftView.backgroundColor = [UIColor clearColor];
@@ -138,12 +146,14 @@
 	self.leftView.layer.rasterizationScale = [UIScreen mainScreen].scale;
 	
 	[self.view addSubview:self.leftView];
+	[self.leftView addGestureRecognizer:self.interactiveHideLeftGestureRecognizer];
 }
 
 - (void)createRightView {
 	
 	NSAssert(self.rightView == nil, @"Are you sure about this?");
-	
+	NSAssert(self.interactiveHideRightGestureRecognizer, @"Cannot be nil");
+
 	self.rightView = [[UIView alloc] initWithFrame:self.rightViewFrame];
 	self.rightView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.rightView.backgroundColor = [UIColor clearColor];
@@ -158,37 +168,33 @@
 	self.rightView.layer.rasterizationScale = [UIScreen mainScreen].scale;
 
 	[self.view addSubview:self.rightView];
+	[self.rightView addGestureRecognizer:self.interactiveHideRightGestureRecognizer];
 }
 
 - (void)createGestureRecognizers {
 	
 	_interactiveHideGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideSideView)];
 	_interactiveHideGestureRecognizer.cancelsTouchesInView = NO;
-	[self.maskView addGestureRecognizer:_interactiveHideGestureRecognizer];
 	
 	_interactiveRevealLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(revealLeftView)];
 	_interactiveRevealLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
 	_interactiveRevealLeftGestureRecognizer.cancelsTouchesInView = NO;
 	_interactiveRevealLeftGestureRecognizer.enabled = NO;
-	[self.rootView addGestureRecognizer:_interactiveRevealLeftGestureRecognizer];
 	
 	_interactiveRevealRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(revealRightView)];
 	_interactiveRevealRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
 	_interactiveRevealRightGestureRecognizer.cancelsTouchesInView = NO;
 	_interactiveRevealRightGestureRecognizer.enabled = NO;
-	[self.rootView addGestureRecognizer:_interactiveRevealRightGestureRecognizer];
 	
 	_interactiveHideLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideSideView)];
 	_interactiveHideLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
 	_interactiveHideLeftGestureRecognizer.cancelsTouchesInView = NO;
 	_interactiveHideLeftGestureRecognizer.enabled = NO;
-	[self.leftView addGestureRecognizer:_interactiveHideLeftGestureRecognizer];
 	
 	_interactiveHideRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideSideView)];
 	_interactiveHideRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
 	_interactiveHideRightGestureRecognizer.cancelsTouchesInView = NO;
 	_interactiveHideRightGestureRecognizer.enabled = NO;
-	[self.rightView addGestureRecognizer:_interactiveHideRightGestureRecognizer];
 }
 
 #pragma mark - Accessor
@@ -228,7 +234,13 @@
 	// TODO: what happens when the left view is shown?
 
 	_leftViewWidth = leftViewWidth;
+	
+	if (self.leftView == nil) {
+		return;	// To not load self.view
+	}
+	
 	self.leftView.frame = self.leftViewFrame;
+	self.leftView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.leftView.bounds].CGPath;
 }
 
 - (void)setRightViewWidth:(CGFloat)rightViewWidth {
@@ -236,7 +248,13 @@
 	// TODO: what happens when the right view is shown?
 
 	_rightViewWidth = rightViewWidth;
+	
+	if (self.rightView == nil) {
+		return;	// To not load self.view
+	}
+
 	self.rightView.frame = self.rightViewFrame;
+	self.rightView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.rightView.bounds].CGPath;
 }
 
 - (CGRect)leftViewFrame {
@@ -277,11 +295,15 @@
 		return;
 	}
 	
-	[self removeChildViewController:self.rootViewController];
+	[self removeRevealChildViewController:self.rootViewController];
 	_rootViewController = rootViewController;
-	[self addNewChildViewController:self.rootViewController viewFrame:self.rootView.bounds];
-	[self.rootView addSubview:self.rootViewController.view];
+	[self addRevealChildViewController:self.rootViewController];
+	[self addRevealChildView:self.rootViewController.view toView:self.rootView];
 	[self.rootView bringSubviewToFront:self.maskView];
+	
+	if (self.state != CARRevealViewStateDefault) {
+		[self hideSideViewControllerAnimated:YES completion:NULL];
+	}
 }
 
 - (void)setLeftViewController:(UIViewController *)leftViewController {
@@ -292,9 +314,9 @@
 		return;
 	}
 	
-	[self removeChildViewController:self.leftViewController];
+	[self removeRevealChildViewController:self.leftViewController];
 	_leftViewController = leftViewController;
-	[self addNewChildViewController:self.leftViewController viewFrame:self.leftViewFrame];
+	[self addRevealChildViewController:self.leftViewController];
 }
 
 - (void)setRightViewController:(UIViewController *)rightViewController {
@@ -305,9 +327,9 @@
 		return;
 	}
 	
-	[self removeChildViewController:self.rightViewController];
+	[self removeRevealChildViewController:self.rightViewController];
 	_rightViewController = rightViewController;
-	[self addNewChildViewController:self.rightViewController viewFrame:self.rightViewFrame];
+	[self addRevealChildViewController:self.rightViewController];
 }
 
 #pragma mark - Reveal Methods
@@ -318,8 +340,7 @@
 	}
 	
 	self.leftView.frame = self.leftViewFrame;
-	self.leftViewController.view.frame = self.leftView.bounds;
-	[self.leftView addSubview:self.leftViewController.view];
+	[self addRevealChildView:self.leftViewController.view toView:self.leftView];
 	
 	[self revealSideView:self.leftView
 				 toFrame:self.leftViewRevealedFrame
@@ -335,8 +356,7 @@
 	}
 	
 	self.rightView.frame = self.rightViewFrame;
-	self.rightViewController.view.frame = self.rightView.bounds;
-	[self.rightView addSubview:self.rightViewController.view];
+	[self addRevealChildView:self.rightViewController.view toView:self.rightView];
 	
 	[self revealSideView:self.rightView
 				 toFrame:self.rightViewRevealedFrame
@@ -448,22 +468,30 @@
 }
 
 #pragma mark
-- (void)removeChildViewController:(UIViewController *)childViewController {
+- (void)addRevealChildView:(UIView *)view toView:(UIView *)superView {
+	
+	NSAssert(view, @"view cannot be nil");
+	NSAssert(superView, @"superView cannot be nil");
+	
+	view.frame = superView.bounds;
+	view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	view.clipsToBounds = YES;
+
+	[superView addSubview:view];
+}
+
+- (void)removeRevealChildViewController:(UIViewController *)childViewController {
 	
 	[childViewController.view removeFromSuperview];
 	[childViewController removeFromParentViewController];
 }
 
-- (void)addNewChildViewController:(UIViewController *)childViewController viewFrame:(CGRect)frame {
+- (void)addRevealChildViewController:(UIViewController *)childViewController {
 
 	[childViewController willMoveToParentViewController:self];
 	[self addChildViewController:childViewController];
 	[childViewController didMoveToParentViewController:self];
-	
-	childViewController.view.frame = frame;
-	childViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	childViewController.view.clipsToBounds = YES;
-	
+		
 	// ここでaddSubviewしないのはsideViewControllerはreveal時にaddSubviewすることでviewWillAppearを呼ばせたいため
 }
 
