@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIView *leftView;
 @property (nonatomic, strong) UIView *rightView;
 
+@property (nonatomic, getter = isMaskViewHidden) BOOL maskViewHidden;
+
 - (void)changeState:(CARRevealViewState)newState;
 
 - (CGRect)leftViewFrame;
@@ -50,6 +52,7 @@
 @synthesize leftViewWidth = _leftViewWidth;
 @synthesize rightViewWidth = _rightViewWidth;
 @synthesize state = _state;
+@synthesize maskViewHidden = _maskViewHidden;
 
 #pragma mark - Lifecycle
 - (id)initWithRootViewController:(UIViewController *)rootViewController {
@@ -115,10 +118,12 @@
 	self.maskView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.maskView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.7f];
 	self.maskView.alpha = 0.0f;
-	self.maskView.hidden = YES;
+	self.maskViewHidden = YES;
 	
 	[self.rootView addSubview:self.maskView];
 	[self.maskView addGestureRecognizer:self.interactiveHideGestureRecognizer];
+	[self.maskView addGestureRecognizer:self.interactiveHideLeftGestureRecognizer];
+	[self.maskView addGestureRecognizer:self.interactiveHideRightGestureRecognizer];
 }
 
 - (void)createRootView {
@@ -155,7 +160,6 @@
 	self.leftView.layer.rasterizationScale = [UIScreen mainScreen].scale;
 	
 	[self.view addSubview:self.leftView];
-	[self.leftView addGestureRecognizer:self.interactiveHideLeftGestureRecognizer];
 }
 
 - (void)createRightView {
@@ -177,7 +181,6 @@
 	self.rightView.layer.rasterizationScale = [UIScreen mainScreen].scale;
 
 	[self.view addSubview:self.rightView];
-	[self.rightView addGestureRecognizer:self.interactiveHideRightGestureRecognizer];
 }
 
 - (void)createGestureRecognizers {
@@ -369,8 +372,15 @@
 	}
 }
 
+- (void)setMaskViewHidden:(BOOL)maskViewHidden {
+	
+	_maskViewHidden = maskViewHidden;
+	self.maskView.hidden = maskViewHidden;
+	self.maskView.userInteractionEnabled = !maskViewHidden;
+}
+
 #pragma mark - Reveal Methods
-- (void)revealLeftViewControllerAnimated:(BOOL)animated completion:(void(^)(void))complation {
+- (void)revealLeftViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion {
 	
 	if (self.leftViewController == nil || self.state != CARRevealViewStateDefault) {
 		return;
@@ -378,15 +388,15 @@
 	
 	self.leftView.frame = self.leftViewFrame;
 	[self addRevealChildView:self.leftViewController.view toView:self.leftView];
-	
+		
 	[self revealSideView:self.leftView
 				 toFrame:self.leftViewRevealedFrame
 				animated:animated
 				 toState:CARRevealViewStateLeftViewShown
-			  completion:complation];
+			  completion:completion];
 }
 
-- (void)revealRightViewControllerAnimated:(BOOL)animated completion:(void(^)(void))complation {
+- (void)revealRightViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion {
 	
 	if (self.rightViewController == nil || self.state != CARRevealViewStateDefault) {
 		return;
@@ -399,10 +409,10 @@
 				 toFrame:self.rightViewRevealedFrame
 				animated:animated
 				 toState:CARRevealViewStateRightViewShown
-			  completion:complation];
+			  completion:completion];
 }
 
-- (void)hideSideViewControllerAnimated:(BOOL)animated completion:(void(^)(void))complation {
+- (void)hideSideViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion {
 	
 	UIView *view = nil;
 	UIView *childView = nil;
@@ -437,11 +447,11 @@
 	
 	void (^revealCompletion)(BOOL finished) = ^(BOOL finished) {
 		
-		self.maskView.hidden = YES;
+		self.maskViewHidden = YES;
 		[childView removeFromSuperview];
 		[self changeState:CARRevealViewStateDefault];
-		if (complation) {
-			complation();
+		if (completion) {
+			completion();
 		}
 	};
 
@@ -456,7 +466,7 @@
 
 - (void)revealSideView:(UIView *)view toFrame:(CGRect)frame animated:(BOOL)animated toState:(CARRevealViewState)toState completion:(void(^)(void))complation {
 	
-	self.maskView.hidden = NO;
+	self.maskViewHidden = NO;
 	self.maskView.alpha = 0.0f;
 	
 	void (^animation)(void) = ^(void) {

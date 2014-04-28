@@ -45,9 +45,9 @@ typedef enum {
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController;
 
-- (void)revealLeftViewControllerAnimated:(BOOL)animated completion:(void(^)(void))complation;
-- (void)revealRightViewControllerAnimated:(BOOL)animated completion:(void(^)(void))complation;
-- (void)hideSideViewControllerAnimated:(BOOL)animated completion:(void(^)(void))complation;
+- (void)revealLeftViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)revealRightViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)hideSideViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 // animated = YES
 - (void)revealLeftView;
