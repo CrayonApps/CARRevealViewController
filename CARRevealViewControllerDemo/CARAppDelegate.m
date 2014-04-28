@@ -23,7 +23,7 @@
 {
 	self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
-	UIViewController *rootViewController = [[CARChildViewController alloc] initWithTitle:@"RootViewController" color:[UIColor greenColor]];
+	UIViewController *rootViewController = [[CARChildViewController alloc] initWithTitle:@"RootViewController" color:[CARChildViewController nextColor]];
 	
 	self.revealViewController = [[CARRevealViewController alloc] initWithRootViewController:rootViewController];
 	self.revealViewController.delegate = self;
@@ -33,8 +33,8 @@
 	self.revealViewController.interactiveHideLeftGestureRecognizer.enabled = YES;
 	self.revealViewController.interactiveHideRightGestureRecognizer.enabled = YES;
 	
-	self.revealViewController.leftViewController = [[CARChildViewController alloc] initWithTitle:@"Left" color:[UIColor redColor]];
-	self.revealViewController.rightViewController = [[CARChildViewController alloc] initWithTitle:@"Right" color:[UIColor blueColor]];
+	self.revealViewController.leftViewController = [[CARChildViewController alloc] initWithTitle:@"Left" color:[CARChildViewController nextColor]];
+	self.revealViewController.rightViewController = [[CARChildViewController alloc] initWithTitle:@"Right" color:[CARChildViewController nextColor]];
 	
 	self.window.rootViewController = self.revealViewController;
 	[self.window makeKeyAndVisible];

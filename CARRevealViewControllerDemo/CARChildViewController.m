@@ -8,39 +8,44 @@
 
 #import "CARChildViewController.h"
 
+#import "CARRevealViewController.h"
+
 @interface CARChildViewController ()
+
+@property (nonatomic, readonly) NSString *labelTitle;
+@property (nonatomic, readonly) UIColor *color;
+
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *segmentedControl;
+
+- (IBAction)didSelectSegment:(id)sender;
 
 @end
 
 @implementation CARChildViewController
 
+@synthesize labelTitle = _labelTitle;
+@synthesize color = _color;
+
++ (UIColor *)nextColor {
+	static NSInteger index = 0;
+	
+	NSArray *colors = @[@"green", @"red", @"blue", @"brown", @"orange", @"purple", @"darkGray", @"magenta", @"cyan"];
+	NSString *colorName = colors[index];
+	index = (index + 1) % colors.count;
+
+	NSString *selectorName = [NSString stringWithFormat:@"%@Color", colorName];
+	SEL selector = NSSelectorFromString(selectorName);
+	
+	return [[UIColor class] performSelector:selector];
+}
+
 - (id)initWithTitle:(NSString *)title color:(UIColor *)color {
 	
-	self = [super init];
+	self = [super initWithNibName:nil bundle:nil];
 	if (self) {
-		
-		// デモ用
-		// subViewの初期化は-loadViewか-viewDidLoadでするべき
-		
-		CGFloat margin = 20.0f;
-		UIViewController *viewController = [[UIViewController alloc] init];
-		viewController.view.backgroundColor = [UIColor whiteColor];
-		
-		CGRect labelFrame = viewController.view.bounds;
-		labelFrame.origin.x += margin;
-		labelFrame.origin.y += margin;
-		labelFrame.size.width -= margin * 2.0f;
-		labelFrame.size.height -= margin * 2.0f;
-		
-		UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
-		label.backgroundColor = color;
-		label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		label.font = [UIFont systemFontOfSize:30.0f];
-		label.textAlignment = NSTextAlignmentCenter;
-		label.text = title;
-		
-		self.view.backgroundColor = [UIColor whiteColor];
-		[self.view addSubview:label];
+		_labelTitle = title.copy;
+		_color = color;
 	}
 	return self;
 }
@@ -49,6 +54,8 @@
 {
     [super viewDidLoad];
 
+	self.titleLabel.backgroundColor = self.color;
+	self.titleLabel.text = self.labelTitle;	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +72,28 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)didSelectSegment:(id)sender {
+
+	UISegmentedControl *segmentedControl = sender;
+	
+	switch (segmentedControl.selectedSegmentIndex) {
+		case 0:	// Left
+			self.revealViewController.leftViewController = [[CARChildViewController alloc] initWithTitle:@"Left" color:[self.class nextColor]];
+			break;
+			
+		case 1:	// Center
+			self.revealViewController.rootViewController = [[CARChildViewController alloc] initWithTitle:@"RootViewController" color:[self.class nextColor]];
+			break;
+			
+		case 2:	// Right
+			self.revealViewController.rightViewController = [[CARChildViewController alloc] initWithTitle:@"Right" color:[self.class nextColor]];
+			break;
+			
+		default:
+			break;
+	}
 }
 
 @end

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CARChildViewController">
+            <connections>
+                <outlet property="titleLabel" destination="6IF-z6-Mgy" id="GvO-Pt-8Kn"/>
+                <outlet property="view" destination="iN0-l3-epB" id="qRx-Xz-bI9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IF-z6-Mgy">
+                    <rect key="frame" x="20" y="20" width="280" height="528"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNF-He-Jd5">
+                    <rect key="frame" x="30" y="510" width="260" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Left"/>
+                        <segment title="Root"/>
+                        <segment title="Right"/>
+                    </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="didSelectSegment:" destination="-1" eventType="valueChanged" id="qBQ-Xb-Wp1"/>
+                    </connections>
+                </segmentedControl>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Child View" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKX-rd-70Y">
+                    <rect key="frame" x="20" y="480" width="280" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="OVs-Cz-qVK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="ZNF-He-Jd5" secondAttribute="centerX" id="54g-XU-TiV"/>
+                <constraint firstAttribute="trailing" secondItem="6IF-z6-Mgy" secondAttribute="trailing" constant="20" id="BaD-Rl-3hs"/>
+                <constraint firstItem="6IF-z6-Mgy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="FZ1-BS-rOi"/>
+                <constraint firstItem="6IF-z6-Mgy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Id0-RX-xKX"/>
+                <constraint firstItem="6IF-z6-Mgy" firstAttribute="width" secondItem="ZNF-He-Jd5" secondAttribute="width" constant="20" id="UzK-0H-3Nq"/>
+                <constraint firstItem="ZNF-He-Jd5" firstAttribute="top" secondItem="KKX-rd-70Y" secondAttribute="bottom" constant="9" id="ZiM-pX-1kp"/>
+                <constraint firstAttribute="bottom" secondItem="6IF-z6-Mgy" secondAttribute="bottom" constant="20" id="epH-mo-Fk9"/>
+                <constraint firstItem="6IF-z6-Mgy" firstAttribute="bottom" secondItem="ZNF-He-Jd5" secondAttribute="bottom" constant="10" id="gtE-mr-iIv"/>
+                <constraint firstItem="KKX-rd-70Y" firstAttribute="width" secondItem="6IF-z6-Mgy" secondAttribute="width" id="tEa-0P-AsK"/>
+                <constraint firstAttribute="centerX" secondItem="KKX-rd-70Y" secondAttribute="centerX" id="yzW-6c-870"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

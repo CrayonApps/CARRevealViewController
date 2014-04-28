@@ -10,6 +10,8 @@
 
 @interface CARChildViewController : UIViewController
 
++ (UIColor *)nextColor;
+
 - (id)initWithTitle:(NSString *)title color:(UIColor *)color;
 
 @end

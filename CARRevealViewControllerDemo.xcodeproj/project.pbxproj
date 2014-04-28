@@ -22,6 +22,7 @@
 		2C5BA80418F05D05002F2455 /* CARRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA80318F05D05002F2455 /* CARRevealViewController.m */; };
 		2C5BA80718F0757D002F2455 /* CARChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BA80618F0757D002F2455 /* CARChildViewController.m */; };
 		2C5BA80918F076F9002F2455 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5BA80818F076F9002F2455 /* QuartzCore.framework */; };
+		2C91A24C190E1FE900901D23 /* CARChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C91A24B190E1FE900901D23 /* CARChildViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		2C5BA80518F0757D002F2455 /* CARChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CARChildViewController.h; sourceTree = "<group>"; };
 		2C5BA80618F0757D002F2455 /* CARChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CARChildViewController.m; sourceTree = "<group>"; };
 		2C5BA80818F076F9002F2455 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2C91A24B190E1FE900901D23 /* CARChildViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CARChildViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				2C5BA7DB18F05C56002F2455 /* CARAppDelegate.m */,
 				2C5BA80518F0757D002F2455 /* CARChildViewController.h */,
 				2C5BA80618F0757D002F2455 /* CARChildViewController.m */,
+				2C91A24B190E1FE900901D23 /* CARChildViewController.xib */,
 				2C5BA80118F05CFC002F2455 /* CARRevealViewController */,
 				2C5BA7E318F05C56002F2455 /* Images.xcassets */,
 				2C5BA7D218F05C56002F2455 /* Supporting Files */,
@@ -243,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C91A24C190E1FE900901D23 /* CARChildViewController.xib in Resources */,
 				2C5BA7E418F05C56002F2455 /* Images.xcassets in Resources */,
 				2C5BA7D618F05C56002F2455 /* InfoPlist.strings in Resources */,
 			);
@@ -465,6 +469,7 @@
 				2C5BA7FC18F05C57002F2455 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C5BA7FD18F05C57002F2455 /* Build configuration list for PBXNativeTarget "CARRevealViewControllerDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -473,6 +478,7 @@
 				2C5BA7FF18F05C57002F2455 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

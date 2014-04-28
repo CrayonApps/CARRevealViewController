@@ -317,28 +317,56 @@
 
 - (void)setLeftViewController:(UIViewController *)leftViewController {
 	
-	// TODO: what happens when the left view is shown?
-
 	if (leftViewController == self.leftViewController) {
 		return;
 	}
 	
-	[self removeRevealChildViewController:self.leftViewController];
-	_leftViewController = leftViewController;
-	[self addRevealChildViewController:self.leftViewController];
+	BOOL leftViewShown = (self.state == CARRevealViewStateLeftViewShown);
+	
+	void (^leftViewControllerSetter)(void) = ^(void) {
+		
+		[self removeRevealChildViewController:self.leftViewController];
+		_leftViewController = leftViewController;
+		[self addRevealChildViewController:self.leftViewController];
+		
+		if (leftViewShown) {
+			[self revealLeftViewControllerAnimated:YES completion:NULL];
+		}
+	};
+		
+	if (leftViewShown) {
+		[self hideSideViewControllerAnimated:YES completion:leftViewControllerSetter];
+	}
+	else {
+		leftViewControllerSetter();
+	}
 }
 
 - (void)setRightViewController:(UIViewController *)rightViewController {
 	
-	// TODO: what happens when the right view is shown?
-
 	if (rightViewController == self.rightViewController) {
 		return;
 	}
 	
-	[self removeRevealChildViewController:self.rightViewController];
-	_rightViewController = rightViewController;
-	[self addRevealChildViewController:self.rightViewController];
+	BOOL rightViewShown = (self.state == CARRevealViewStateRightViewShown);
+	
+	void (^rightViewControllerSetter)(void) = ^(void) {
+		
+		[self removeRevealChildViewController:self.rightViewController];
+		_rightViewController = rightViewController;
+		[self addRevealChildViewController:self.rightViewController];
+		
+		if (rightViewShown) {
+			[self revealRightViewControllerAnimated:YES completion:NULL];
+		}
+	};
+
+	if (rightViewShown) {
+		[self hideSideViewControllerAnimated:YES completion:rightViewControllerSetter];
+	}
+	else {
+		rightViewControllerSetter();
+	}
 }
 
 #pragma mark - Reveal Methods
